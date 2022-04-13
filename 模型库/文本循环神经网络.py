@@ -9,7 +9,7 @@ class 配置:
         self.测试集路径 = 数据文件夹 + '/数据仓/测试集.txt'
         self.验证集路径 = 数据文件夹 + '/数据仓/验证集.txt'
         self.类别名单 = [类别.strip() for 类别 in open(数据文件夹 + '/数据仓/类别名单.txt').readlines()]
-        self.字表路径 = 数据文件夹 + '/数据仓/字表.pkl'
+        self.文字编码字典路径 = 数据文件夹 + '/数据仓/文字编码字典.pkl'
         self.训练结果保存路径 = 数据文件夹 + '/训练结果仓/' + self.模型名 + '.校验点'
         self.日志路径 = 数据文件夹 + '/日志仓/' + self.模型名
         self.预处理的字向量 = torch.tensor(
@@ -19,9 +19,9 @@ class 配置:
         self.失活 = 0.5
         self.无效改进阈值 = 1000  # 若超过1000批次效果还没提升，则提前结束训练
         self.类别数 = len(self.类别名单)
-        self.字表行数 = 0
+        self.文字编码字典行数 = 0
         self.迭代数 = 10  # 可能需要改名，暂时无法理解
-        self.每批长度 = 128
+        self.每批数量 = 128
         self.句子长度 = 32
         self.学习率 = 1e-3
         self.字向量长度 = self.预处理的字向量.size(1) if self.预处理的字向量 is not None else 300

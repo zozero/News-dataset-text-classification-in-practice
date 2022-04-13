@@ -5,6 +5,8 @@ from importlib import import_module as 导入模块
 import numpy as np
 import torch
 
+from 数据集迭代器类 import 数据集迭代器
+
 解析器 = argparse.ArgumentParser(description='中文文本分类器')
 解析器.add_argument('--模型文件名', type=str, required=True,
                  help='选择一个模型：TextCNN, 文本循环神经网络, FastText, TextRCNN, TextRNN_Att, DPCNN, Transformer')
@@ -26,7 +28,7 @@ if __name__ == '__main__':
         # from utils_fast
         参数.字嵌入方式 = '随机'
     else:
-        from 工具函数 import 处理数据集
+        from 工具函数 import 处理数据集, 计算耗费时间
 
     模型 = 导入模块('模型库.' + 模型文件名)
     模型配置 = 模型.配置(数据文件夹, 字向量文件名, 参数.字嵌入方式)
@@ -36,6 +38,11 @@ if __name__ == '__main__':
     torch.cuda.manual_seed(1)
     torch.backends.cudnn.deterministic = True  # 保证每次结果相同
 
-    开始时间=time.time()
+    开始时间 = time.time()
     print("载入数据......")
-    处理数据集(模型配置,参数.词语)
+    文字编码字典, 训练集, 验证集, 测试集 = 处理数据集(模型配置, 参数.词语)
+    训练集迭代器 = 数据集迭代器(训练集, 模型配置)
+    验证集迭代器 = 数据集迭代器(验证集, 模型配置)
+    测试集迭代器 = 数据集迭代器(测试集, 模型配置)
+    耗费时间 = 计算耗费时间(开始时间)
+    print('耗费时间', 耗费时间)
