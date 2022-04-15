@@ -1,11 +1,15 @@
 import argparse
 import time
 from importlib import import_module as 导入模块
+from tensorboardX import SummaryWriter
+
+# from 模型库 import 文本循环神经网络 as 模型
 
 import numpy as np
 import torch
 
 from 数据集迭代器类 import 数据集迭代器
+from 训练与评估函数 import 初始化神经网络, 训练
 
 解析器 = argparse.ArgumentParser(description='中文文本分类器')
 解析器.add_argument('--模型文件名', type=str, required=True,
@@ -46,3 +50,13 @@ if __name__ == '__main__':
     测试集迭代器 = 数据集迭代器(测试集, 模型配置)
     耗费时间 = 计算耗费时间(开始时间)
     print('耗费时间', 耗费时间)
+
+    模型配置.文字编码字典行数 = len(文字编码字典)
+    长短期记忆模型 = 模型.长短期记忆网络模型(模型配置).to(模型配置.设备)
+    作家 = SummaryWriter(log_dir=模型配置.日志路径 + '/' + time.strftime("%m-%d_%H.%M", time.localtime()))
+    if 模型文件名 != 'Transformer':
+        初始化神经网络(长短期记忆模型)
+
+    print(长短期记忆模型.parameters)
+
+    训练(模型配置, 长短期记忆模型, 训练集迭代器, 验证集迭代器, 测试集迭代器, 作家)

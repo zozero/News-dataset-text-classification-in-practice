@@ -13,12 +13,9 @@ class 数据集迭代器:
     def _转成张量(self, 数据集):
         x = torch.LongTensor([_[0] for _ in 数据集]).to(self.设备)
         y = torch.LongTensor([_[1] for _ in 数据集]).to(self.设备)
-        二元模型 = torch.LongTensor([_[3] for _ in 数据集]).to(self.设备)
-        三元模型 = torch.LongTensor([_[4] for _ in 数据集]).to(self.设备)
-
         句子长度 = torch.LongTensor([_[2] for _ in 数据集]).to(self.设备)
 
-        return (x, 二元模型, 三元模型, 句子长度), y
+        return (x, 句子长度), y
 
     def __next__(self):
         if self.总批数是否为小数 and self.索引 == self.总批数:
