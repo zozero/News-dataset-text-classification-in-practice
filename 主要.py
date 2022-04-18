@@ -13,7 +13,7 @@ from 训练与评估函数 import 初始化神经网络, 训练
 
 解析器 = argparse.ArgumentParser(description='中文文本分类器')
 解析器.add_argument('--模型文件名', type=str, required=True,
-                 help='选择一个模型：TextCNN, 文本循环神经网络, FastText, TextRCNN, TextRNN_Att, DPCNN, Transformer')
+                 help='选择一个模型：文本卷积神经网络, 文本循环神经网络, FastText, TextRCNN, TextRNN_Att, DPCNN, Transformer')
 解析器.add_argument('--字嵌入方式', default='预处理', type=str, help='随机或者预载训练集')
 解析器.add_argument('--词语', default=False, type=bool, help='真为词语，假为字符')
 参数 = 解析器.parse_args()
