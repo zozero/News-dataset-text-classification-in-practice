@@ -6,7 +6,7 @@ import torch.nn.functional as F
 
 class 配置:
     def __init__(self, 数据文件夹, 字向量文件名, 字嵌入方式):
-        self.模型名 = '文本循环神经网络'
+        self.模型名 = '文本重叠神经网络'
         self.训练集路径 = 数据文件夹 + '/数据仓/训练集.txt'
         self.测试集路径 = 数据文件夹 + '/数据仓/测试集.txt'
         self.验证集路径 = 数据文件夹 + '/数据仓/验证集.txt'
